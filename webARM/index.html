@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!--Меню-->
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-default navbar-static-top">
+                <div class="container">
+                    <button type="button" class="btn btn-default navbar-btn" id="bRequest">
+                        Текущие заявки
+                    </button>
+                    <button type="button" class="btn btn-default navbar-btn" id="bCategories">
+                        Администрирование
+                    </button>
+                </div>
+            </nav>
+        </div>
+        <script type="text/javascript">
+            document.getElementById('bRequest').onclick = function() {
+                document.getElementById('request').style.display = 'block';
+                document.getElementById('categories').style.display = 'none';
+            }
+            document.getElementById('bCategories').onclick = function() {
+                document.getElementById('request').style.display = 'none';
+                document.getElementById('categories').style.display = 'block';
+            }
+
+        </script>
+
+        <!--Текущие заявки-->
+        <div class="span12" id="request">
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="panel-body">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>Заявка 1</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="caption">
+                                <p>Выбранный мастер:</p>
+                                <p>Адрес заявки:</p>
+                                <p>Коментарий клиента:</p>
+                                <div class="panel panel-default">
+                                    <div class="panel-body" style="color:dimgray">
+                                        коментарий
+                                    </div>
+                                </div>
+
+                                <p> Статус заявки:</p>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 10%">
+                                        <span class="sr-only">10% Complete (warning)</span>
+                                    </div>
+                                    <!--
+                            <div class="progress-bar progress-bar-success" style="width: 35%">
+                                <span class="sr-only">35% Complete (success)</span>
+                            </div>
+                            
+                            <div class="progress-bar progress-bar-danger" style="width: 10%">
+                                <span class="sr-only">10% Complete (danger)</span>
+                            </div>
+                            -->
+                                </div>
+                                <p>
+                                    <a href="#" class="btn btn-default" role="button">Связаться с клиентом</a>
+                                    <a href="#" class="btn btn-default" role="button">Отправить мастеру</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="panel-body">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>Заявка 2</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="caption">
+                                <p>Выбранный мастер:</p>
+                                <p>Адрес заявки:</p>
+                                <p>Коментарий клиента:</p>
+                                <div class="panel panel-default">
+                                    <div class="panel-body" style="color:dimgray">
+                                        коментарий
+                                    </div>
+                                </div>
+
+                                <p> Статус заявки:</p>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 10%">
+                                        <span class="sr-only">10% Complete (warning)</span>
+                                    </div>
+                                    <!--
+                            <div class="progress-bar progress-bar-success" style="width: 35%">
+                                <span class="sr-only">35% Complete (success)</span>
+                            </div>
+                            
+                            <div class="progress-bar progress-bar-danger" style="width: 10%">
+                                <span class="sr-only">10% Complete (danger)</span>
+                            </div>
+                            -->
+                                </div>
+                                <p>
+                                    <a href="#" class="btn btn-default" role="button">Связаться с клиентом</a>
+                                    <a href="#" class="btn btn-default" role="button">Отправить мастеру</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="panel-body">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>Заявка 3</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="caption">
+                                <p>Выбранный мастер:</p>
+                                <p>Адрес заявки:</p>
+                                <p>Коментарий клиента:</p>
+                                <div class="panel panel-default">
+                                    <div class="panel-body" style="color:dimgray">
+                                        коментарий
+                                    </div>
+                                </div>
+
+                                <p> Статус заявки:</p>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 10%">
+                                        <span class="sr-only">10% Complete (warning)</span>
+                                    </div>
+                                    <!--
+                            <div class="progress-bar progress-bar-success" style="width: 35%">
+                                <span class="sr-only">35% Complete (success)</span>
+                            </div>
+                            
+                            <div class="progress-bar progress-bar-danger" style="width: 10%">
+                                <span class="sr-only">10% Complete (danger)</span>
+                            </div>
+                            -->
+                                </div>
+                                <p>
+                                    <a href="#" class="btn btn-default" role="button">Связаться с клиентом</a>
+                                    <a href="#" class="btn btn-default" role="button">Отправить мастеру</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="panel-body">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>Заявка 4</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="caption">
+                                <p>Выбранный мастер:</p>
+                                <p>Адрес заявки:</p>
+                                <p>Коментарий клиента:</p>
+                                <div class="panel panel-default">
+                                    <div class="panel-body" style="color:dimgray">
+                                        коментарий
+                                    </div>
+                                </div>
+
+                                <p> Статус заявки:</p>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 10%">
+                                        <span class="sr-only">10% Complete (warning)</span>
+                                    </div>
+                                    <!--
+                            <div class="progress-bar progress-bar-success" style="width: 35%">
+                                <span class="sr-only">35% Complete (success)</span>
+                            </div>
+                            
+                            <div class="progress-bar progress-bar-danger" style="width: 10%">
+                                <span class="sr-only">10% Complete (danger)</span>
+                            </div>
+                            -->
+                                </div>
+                                <p>
+                                    <a href="#" class="btn btn-default" role="button">Связаться с клиентом</a>
+                                    <a href="#" class="btn btn-default" role="button">Отправить мастеру</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!--Администрирование-->
+        <div class="span12" id="categories" style="display: none">
+
+
+
+
+        </div>
+
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
