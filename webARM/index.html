@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" ng-app="mainApp">
 
 <head>
     <meta charset="utf-8">
@@ -16,9 +16,37 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
 </head>
-
-<body>
+<script type="text/javascript">
+    angular.module('mainApp', [])
+        .config(function($interpolateProvider) {
+                $interpolateProvider.startSymbol('{[{');
+                $interpolateProvider.endSymbol('}]}');
+            })
+        .controller('main', function($scope, $http) {
+            $http({method: 'GET', url: '/get_order'}).
+                success(function(data, status, headers, config) {
+                    $scope.orders = data.orders;
+                }).
+                error(function(data, status, headers, config) {
+                    console.log(data);
+                });
+            $http({method: 'GET', url: '/get_category'}).
+                success(function(data, status, headers, config) {
+                    $scope.categories = data.categories;
+                }).
+                error(function(data, status, headers, config) {
+                    console.log(data);
+                });
+        });
+</script>
+<body ng-controller="main">
     <!--Меню-->
     <div class="container-fluid">
         <div class="row">
@@ -42,35 +70,34 @@
                 document.getElementById('request').style.display = 'none';
                 document.getElementById('categories').style.display = 'block';
             }
-
         </script>
 
         <!--Текущие заявки-->
         <div class="span12" id="request">
-
-            <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="order in orders">
                 <div class="panel-body">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4>Заявка 1</h4>
+                            <h4>{[{order.title}]}</h4>
                         </div>
                         <div class="panel-body">
                             <div class="caption">
-                                <p>Выбранный мастер:</p>
-                                <p>Адрес заявки:</p>
+                                <p>Выбранный мастер: {[{order.fio_staff}]}</p>
+                                <p>Адрес заявки: {[{order.address_user}]}</p>
                                 <p>Коментарий клиента:</p>
                                 <div class="panel panel-default">
                                     <div class="panel-body" style="color:dimgray">
-                                        коментарий
+                                        {[{order.comment}]}
                                     </div>
                                 </div>
 
-                                <p> Статус заявки:</p>
+                                <p> Статус заявки: {[{order.status}]}</p>
+<!--
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 10%">
                                         <span class="sr-only">10% Complete (warning)</span>
                                     </div>
-                                    <!--
+                                    
                             <div class="progress-bar progress-bar-success" style="width: 35%">
                                 <span class="sr-only">35% Complete (success)</span>
                             </div>
@@ -78,163 +105,40 @@
                             <div class="progress-bar progress-bar-danger" style="width: 10%">
                                 <span class="sr-only">10% Complete (danger)</span>
                             </div>
-                            -->
-                                </div>
-                                <p>
-                                    <a href="#" class="btn btn-default" role="button">Связаться с клиентом</a>
-                                    <a href="#" class="btn btn-default" role="button">Отправить мастеру</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="panel-body">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4>Заявка 2</h4>
-                        </div>
-                        <div class="panel-body">
-                            <div class="caption">
-                                <p>Выбранный мастер:</p>
-                                <p>Адрес заявки:</p>
-                                <p>Коментарий клиента:</p>
-                                <div class="panel panel-default">
-                                    <div class="panel-body" style="color:dimgray">
-                                        коментарий
-                                    </div>
-                                </div>
-
-                                <p> Статус заявки:</p>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 10%">
-                                        <span class="sr-only">10% Complete (warning)</span>
-                                    </div>
-                                    <!--
-                            <div class="progress-bar progress-bar-success" style="width: 35%">
-                                <span class="sr-only">35% Complete (success)</span>
-                            </div>
                             
-                            <div class="progress-bar progress-bar-danger" style="width: 10%">
-                                <span class="sr-only">10% Complete (danger)</span>
-                            </div>
-                            -->
                                 </div>
+-->
                                 <p>
-                                    <a href="#" class="btn btn-default" role="button">Связаться с клиентом</a>
-                                    <a href="#" class="btn btn-default" role="button">Отправить мастеру</a>
+                                    <a href="tel:{[{order.phone_user}]}" class="btn btn-default" role="button">Связаться с клиентом</a>
+                                    <a href="tel:{[{order.phone_staff}]}" class="btn btn-default" role="button">Отправить мастеру</a>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="panel-body">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4>Заявка 3</h4>
-                        </div>
-                        <div class="panel-body">
-                            <div class="caption">
-                                <p>Выбранный мастер:</p>
-                                <p>Адрес заявки:</p>
-                                <p>Коментарий клиента:</p>
-                                <div class="panel panel-default">
-                                    <div class="panel-body" style="color:dimgray">
-                                        коментарий
-                                    </div>
-                                </div>
-
-                                <p> Статус заявки:</p>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 10%">
-                                        <span class="sr-only">10% Complete (warning)</span>
-                                    </div>
-                                    <!--
-                            <div class="progress-bar progress-bar-success" style="width: 35%">
-                                <span class="sr-only">35% Complete (success)</span>
-                            </div>
-                            
-                            <div class="progress-bar progress-bar-danger" style="width: 10%">
-                                <span class="sr-only">10% Complete (danger)</span>
-                            </div>
-                            -->
-                                </div>
-                                <p>
-                                    <a href="#" class="btn btn-default" role="button">Связаться с клиентом</a>
-                                    <a href="#" class="btn btn-default" role="button">Отправить мастеру</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="panel-body">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4>Заявка 4</h4>
-                        </div>
-                        <div class="panel-body">
-                            <div class="caption">
-                                <p>Выбранный мастер:</p>
-                                <p>Адрес заявки:</p>
-                                <p>Коментарий клиента:</p>
-                                <div class="panel panel-default">
-                                    <div class="panel-body" style="color:dimgray">
-                                        коментарий
-                                    </div>
-                                </div>
-
-                                <p> Статус заявки:</p>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 10%">
-                                        <span class="sr-only">10% Complete (warning)</span>
-                                    </div>
-                                    <!--
-                            <div class="progress-bar progress-bar-success" style="width: 35%">
-                                <span class="sr-only">35% Complete (success)</span>
-                            </div>
-                            
-                            <div class="progress-bar progress-bar-danger" style="width: 10%">
-                                <span class="sr-only">10% Complete (danger)</span>
-                            </div>
-                            -->
-                                </div>
-                                <p>
-                                    <a href="#" class="btn btn-default" role="button">Связаться с клиентом</a>
-                                    <a href="#" class="btn btn-default" role="button">Отправить мастеру</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
-
-
         <!--Администрирование-->
         <div class="span12" id="categories" style="display: none">
-
-
-
-
+            <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="category in categories">
+                <div class="panel-body">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>{[{category.title}]}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p ng-repeat="subcategory in category.subcategory">
+                                {[{subcategory.title}]}
+                            </p>
+                            <p>
+                                <a href="#" class="btn btn-default" role="button">Добавить категорию</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
+    </div>
 </body>
 
 </html>

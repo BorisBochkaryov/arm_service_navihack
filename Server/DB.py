@@ -39,6 +39,10 @@ def setUserData(id, field, data):
 def getCategory(json=False):
     result_category = __sql_exec_all("SELECT * FROM category")
     categories = [dict(zip(('id', 'title'), X)) for X in result_category]
+    for X in categories:
+        result_subcategory = __sql_exec_all("SELECT * FROM subcategory WHERE category_id = '" + str(X['id']) + "'")
+        subcategories = [dict(zip(('id', 'category_id', 'title'), X)) for X in result_subcategory]
+        X.update({'subcategory':subcategories})
     if json == True:
         return jsonify({'status':'ok', 'categories':categories})
     else:
@@ -63,3 +67,15 @@ def getStaff(category, subcategory, json=False):
 def addOrder(user_id, staff_id, date, comment):
     sql = "INSERT INTO orders(user_id, staff_id, date, comment) VALUES ('" + str(user_id) + "', '" + str(staff_id) + "', '" + str(date) + "', '" + str(comment) + "');"
     __sql_exec(sql)
+
+def getOrder(json=False):
+    result_order = __sql_exec_all("SELECT *, (SELECT fio FROM staff WHERE id = orders.staff_id),"
+                                  "(SELECT phone FROM staff WHERE id = orders.staff_id),"
+                                  "(SELECT name FROM users WHERE id = orders.user_id),"
+                                  "(SELECT phone FROM users WHERE id = orders.user_id),"
+                                  "(SELECT address FROM users WHERE id = orders.user_id) FROM orders")
+    orders = [dict(zip(('id','user_id','staff_id','date','comment','status','title','fio_staff','phone_staff','name_user','phone_user','address_user'), X)) for X in result_order]
+    if json == True:
+        return jsonify({'status':'ok', 'orders':orders})
+    else:
+        return result_order

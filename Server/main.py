@@ -1,11 +1,7 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_file
 import DB
 
 app = Flask(__name__)
-
-@app.route("/")
-def index():
-    return jsonify({'status':'ok'})
 
 @app.route("/get_user_data/<id>")
 def getUserData(id):
@@ -32,6 +28,31 @@ def getStaff(category, subcategory):
 def addOrder(user_id, staff_id, date, comment):
     DB.addOrder(user_id, staff_id, date, comment)
     return jsonify({'status':'ok'})
+
+@app.route("/get_order")
+def getOrder():
+    return DB.getOrder(json=True)
+
+
+# web сайт
+@app.after_request
+def set_response_headers(response):
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
+
+@app.route("/")
+def index():
+    return send_file("../webARM/index.html")
+
+@app.route("/css/<file>")
+def css(file):
+    return send_file("../webARM/css/" + str(file))
+
+@app.route("/js/<file>")
+def js(file):
+    return send_file("../webARM/js/" + str(file))
 
 if __name__ == "__main__":
     app.run()
